@@ -18,6 +18,4 @@ jobs:
       - name: Fetch data
         uses: githubocto/flat@v2
         with:
-          http_url: https://api.coindesk.com/v2/bpi/currentprice.json
-          downloaded_filename: btc-price.json
           postprocess: ./postprocess.ts
