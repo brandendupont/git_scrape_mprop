@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import geopandas as gpd
 import requests as r
+import os
 
 
 
@@ -94,6 +95,9 @@ def assign_reference_tables(df, lu, lu_gp):
 if __name__ == "__main__":
 
     print("argv :", sys.argv)
+
+    if os.path.isfile("flat_mprop.csv"):
+        os.remove("flat_mprop.csv")
 
 
     # import mprop
