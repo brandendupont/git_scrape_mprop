@@ -125,8 +125,5 @@ if __name__ == "__main__":
     # merge to mprop
     mp = pd.merge(mp, pcb[['TAXKEY', 'lat', 'long']])
     
-    #drop unamed column
-    if 'Unnamed: 0' in mp.columns:
-        mp.drop('Unnamed: 0', axis=1, inplace=True)
-
+    #save data
     mp.to_csv("flat_mprop.csv")
