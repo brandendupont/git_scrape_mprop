@@ -95,14 +95,19 @@ if __name__ == "__main__":
 
     print("argv :", sys.argv)
 
+    df = pd.DataFrame(np.random.randint(
+    0, 100, size=(10, 4)), columns=list('ABCD'))
+
+    df.to_csv("df_output.csv")
+
     # import mprop
     mprop = pd.read_csv(get_property_url('mprop'),\
                         usecols=['TAXKEY','YR_ASSMT', 'NR_UNITS', 'YR_BUILT', 'C_A_LAND', 'C_A_IMPRV', 'C_A_TOTAL', 'OWN_OCPD', 'LAND_USE_GP', "LAND_USE", 
                         'OWNER_NAME_1', 'OWNER_NAME_2', 'OWNER_NAME_3', 'OWNER_MAIL_ADDR','OWNER_CITY_STATE', 'OWNER_ZIP', 'ZONING'])
 
     #import land use codes
-    LU = pd.read_csv('/data/land_use.csv', index_col="lu-code")
-    LU_GP = pd.read_csv('/data/land_use_full.csv', index_col="Category_full")
+    LU = pd.read_csv('data/land_use.csv', index_col="lu-code")
+    LU_GP = pd.read_csv('data/land_use_full.csv', index_col="Category_full")
 
     #read city parcelbase
     pcb = gpd.read_file(get_mke_od_url())
