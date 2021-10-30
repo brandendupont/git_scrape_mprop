@@ -95,10 +95,6 @@ if __name__ == "__main__":
 
     print("argv :", sys.argv)
 
-    df = pd.DataFrame(np.random.randint(
-    0, 100, size=(10, 4)), columns=list('ABCD'))
-
-    df.to_csv("df_output.csv")
 
     # import mprop
     mprop = pd.read_csv(get_property_url('mprop'),\
@@ -127,3 +123,8 @@ if __name__ == "__main__":
     
     #save data
     mp.to_csv("flat_mprop.csv")
+
+    df = pd.DataFrame(np.random.randint(
+    0, 100, size=(10, 4)), columns=list('ABCD'))
+
+    df.to_csv("df_output.csv")
