@@ -13,7 +13,7 @@ A postprocess script in Github's Flat Data actions is used to fire a Python scri
 ## Data Notes
 
 - [MPROP](https://data.milwaukee.gov/dataset/mprop)
-- Census estimates are taken from the ACS 5-Year Estimates: 2015-2019 ACS 5-Year Estimates. 
+- Census estimates are taken from the ACS 5-Year Estimates: 2015-2019.
 - [MPD Police Boundaries](https://data.milwaukee.gov/dataset/mpd-stations)
 - [Aldermanic Boundaries](https://data.milwaukee.gov/dataset/aldermanic-districts)
 
