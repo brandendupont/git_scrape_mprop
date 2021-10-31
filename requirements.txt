@@ -1,6 +1,5 @@
 pandas
 numpy
 requests
-spatialindex
 rtree
 geopandas
