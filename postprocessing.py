@@ -131,7 +131,7 @@ if __name__ == "__main__":
        'C_A_TOTAL', 'OWNER_NAME_1', 'OWNER_NAME_2', 'OWNER_NAME_3',
        'OWNER_MAIL_ADDR', 'OWNER_CITY_STATE', 'OWNER_ZIP', 'NR_UNITS',
        'YR_BUILT', 'ZONING', 'LAND_USE', 'LAND_USE_GP', 'OWN_OCPD',
-       'land_use_text', 'Category_full_txt', 'lat', 'long']].to_csv("flat_mprop.csv")
+       'land_use_text', 'Category_full_txt', 'lat', 'long']].to_csv("flat_mprop.csv", index=False)
 
     print(mp.shape)
 
