@@ -125,12 +125,13 @@ if __name__ == "__main__":
     # merge to mprop
     mp = pd.merge(mp, pcb[['TAXKEY', 'lat', 'long']])
 
-    #drop col
-    if "Unnamed: 0" in mp.columns:
-        mp.drop("Unnamed: 0", axis=1, inplace=True)
     
     #save data
-    mp.to_csv("flat_mprop.csv")
+    mp[['TAXKEY', 'YR_ASSMT', 'C_A_LAND', 'C_A_IMPRV',
+       'C_A_TOTAL', 'OWNER_NAME_1', 'OWNER_NAME_2', 'OWNER_NAME_3',
+       'OWNER_MAIL_ADDR', 'OWNER_CITY_STATE', 'OWNER_ZIP', 'NR_UNITS',
+       'YR_BUILT', 'ZONING', 'LAND_USE', 'LAND_USE_GP', 'OWN_OCPD',
+       'land_use_text', 'Category_full_txt', 'lat', 'long']].to_csv("flat_mprop.csv")
 
     print(mp.shape)
 
