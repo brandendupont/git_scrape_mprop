@@ -6,6 +6,11 @@ import requests as r
 import os
 
 
+## Global Vars
+CRS = 4326
+ALD_2018 = r'https://data.milwaukee.gov/dataset/1301738f-4b4a-4f73-bbaa-a4cac069e371/resource/51ca7f90-66cd-47f2-9197-fd4a5ba08c44/download/alderman.zip'
+MPD_SHP = r'https://data.milwaukee.gov/dataset/1cb11103-18df-4c6e-b622-859d1e217920/resource/cac45f22-0609-4972-88a5-a3f6d9f74f83/download/mpd.zip'
+
 
 def get_mke_od_url():
 
@@ -96,6 +101,12 @@ if __name__ == "__main__":
 
     print("argv :", sys.argv)
 
+    # import aldermanic districts
+    ald = gpd.read_file(ALD_2018).to_crs(CRS)
+
+    #import police districts
+    mpd = gpd.read_file(MPD_SHP).to_crs(CRS)
+
 
     # import mprop
     mprop = pd.read_csv(get_property_url('mprop'),\
@@ -105,6 +116,9 @@ if __name__ == "__main__":
     #import land use codes
     LU = pd.read_csv('data/land_use.csv', index_col="lu-code")
     LU_GP = pd.read_csv('data/land_use_full.csv', index_col="Category_full")
+
+    #import census tract data
+    cen = gpd.read_file("data/census.geojson")
 
     #read city parcelbase
     pcb = gpd.read_file(get_mke_od_url())
@@ -122,11 +136,25 @@ if __name__ == "__main__":
     # merge to mprop
     mp = pd.merge(mp, pcb[['TAXKEY', 'lat', 'long']])
 
-    
-    #save data
-    mp.to_csv("flat_mprop.csv", index=False)
+    #convert mprop to geodataframe
+    mp = gpd.GeoDataFrame(mp, geometry=gpd.points_from_xy(mp.long, mp.lat), crs=4326)
 
-    print(mp.shape)
+    #merge census data
+    mp_cen = gpd.sjoin(mp, cen).drop('index_right', axis=1)
+
+    #merge aldermanic boundaries
+    mp_cen_ald = gpd.sjoin(mp_cen, ald[['ALDERMAN', 'geometry', 'ALD']]).drop('index_right', axis=1)
+
+    #merge police boundaries
+    mp_cen_ald_mpd = gpd.sjoin(mp_cen_ald, mpd[['POLICE', 'geometry']]).drop('index_right', axis=1)
+
+    #drop any duplicated taxkeys 
+    mp_cen_ald_mpd = mp_cen_ald_mpd.drop_duplicates("TAXKEY", keep='first')
+
+    #save data
+    mp_cen_ald_mpd.to_csv("flat_mprop.csv", index=False)
+
+    print(mp_cen_ald_mpd.shape)
 
     df = pd.DataFrame(np.random.randint(
     0, 100, size=(10, 4)), columns=list('ABCD'))
