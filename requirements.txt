@@ -2,3 +2,5 @@ pandas
 numpy
 geopandas
 requests
+libspatialindex-dev
+rtree
