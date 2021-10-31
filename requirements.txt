@@ -1,6 +1,6 @@
 pandas
 numpy
-geopandas
 requests
-libspatialindex-dev
+spatialindex
 rtree
+geopandas
