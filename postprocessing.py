@@ -143,7 +143,7 @@ if __name__ == "__main__":
     pcb = pcb_to_wgs_84(pcb)
 
     # add land use
-    mp = assign_reference_tables(mprop, LU, LU_GP)
+    mp = assign_reference_tables(mp, LU, LU_GP)
 
     #reconcile pcb names
     pcb['Taxkey'] = pcb['Taxkey'].fillna(0).astype('int64')
