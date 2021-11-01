@@ -11,6 +11,15 @@ CRS = 4326
 ALD_2018 = r'https://data.milwaukee.gov/dataset/1301738f-4b4a-4f73-bbaa-a4cac069e371/resource/51ca7f90-66cd-47f2-9197-fd4a5ba08c44/download/alderman.zip'
 MPD_SHP = r'https://data.milwaukee.gov/dataset/1cb11103-18df-4c6e-b622-859d1e217920/resource/cac45f22-0609-4972-88a5-a3f6d9f74f83/download/mpd.zip'
 
+MPROP_COLS = ['TAXKEY','YR_ASSMT', 'NR_UNITS', 'YR_BUILT', 'C_A_LAND', 'C_A_IMPRV', 'C_A_TOTAL', 'OWN_OCPD',\
+                                 'LAND_USE_GP', "LAND_USE", 'HOUSE_NR_LO', 'SDIR','STREET', 'STTYPE', \
+                        'OWNER_NAME_1', 'OWNER_NAME_2', 'OWNER_NAME_3', 'OWNER_MAIL_ADDR','OWNER_CITY_STATE', 'OWNER_ZIP', 'ZONING']
+
+SUBSET_MPROP_COLS = ['TAXKEY', 'YR_ASSMT','C_A_LAND', 'C_A_IMPRV', 'C_A_TOTAL', 'OWNER_NAME_1', 'OWNER_NAME_2',\
+       'OWNER_NAME_3', 'OWNER_MAIL_ADDR', 'OWNER_CITY_STATE', 'OWNER_ZIP',\
+       'NR_UNITS', 'YR_BUILT', 'ZONING', 'LAND_USE', 'LAND_USE_GP', 'OWN_OCPD',\
+       'Address']
+
 
 def get_mke_od_url():
 
@@ -109,9 +118,16 @@ if __name__ == "__main__":
 
 
     # import mprop
-    mprop = pd.read_csv(get_property_url('mprop'),\
-                        usecols=['TAXKEY','YR_ASSMT', 'NR_UNITS', 'YR_BUILT', 'C_A_LAND', 'C_A_IMPRV', 'C_A_TOTAL', 'OWN_OCPD', 'LAND_USE_GP', "LAND_USE", 
-                        'OWNER_NAME_1', 'OWNER_NAME_2', 'OWNER_NAME_3', 'OWNER_MAIL_ADDR','OWNER_CITY_STATE', 'OWNER_ZIP', 'ZONING'])
+    mp = pd.read_csv(get_property_url('mprop'),\
+                            usecols=MPROP_COLS)
+
+    # clean address
+    mp[['SDIR', 'STTYPE']] = mp[['SDIR', 'STTYPE']].apply(lambda x: x.str.capitalize())
+    mp['STREET'] = mp['STREET'].str.split(" ").apply(lambda x: " ".join(list(map(str.capitalize, x))))
+    mp['Address'] = mp['HOUSE_NR_LO'].astype(str) + " " + mp['SDIR'] + " " + mp['STTYPE']+ " " + mp['STREET']
+
+    #subset mprop
+    mp = mp[SUBSET_MPROP_COLS]
 
     #import land use codes
     LU = pd.read_csv('data/land_use.csv', index_col="lu-code")
