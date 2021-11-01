@@ -20,6 +20,7 @@ A postprocess script in Github's Flat Data actions is used to fire a Python scri
 
 ## Next steps:
 - add tax delinquency
+- add conveyance data
 
 
 ## Thanks
