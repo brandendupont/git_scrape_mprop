@@ -124,7 +124,7 @@ if __name__ == "__main__":
     # clean address
     mp[['SDIR', 'STTYPE']] = mp[['SDIR', 'STTYPE']].apply(lambda x: x.str.capitalize())
     mp['STREET'] = mp['STREET'].str.split(" ").apply(lambda x: " ".join(list(map(str.capitalize, x))))
-    mp['Address'] = mp['HOUSE_NR_LO'].astype(str) + " " + mp['SDIR'] + " " + mp['STTYPE']+ " " + mp['STREET']
+    mp['Address'] = mp['HOUSE_NR_LO'].astype(str) + " " + mp['SDIR'] + " " + mp['STREET'] + " " + mp['STTYPE']
 
     #subset mprop
     mp = mp[SUBSET_MPROP_COLS]
