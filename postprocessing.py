@@ -13,12 +13,13 @@ MPD_SHP = r'https://data.milwaukee.gov/dataset/1cb11103-18df-4c6e-b622-859d1e217
 
 MPROP_COLS = ['TAXKEY','YR_ASSMT', 'NR_UNITS', 'YR_BUILT', 'C_A_LAND', 'C_A_IMPRV', 'C_A_TOTAL', 'OWN_OCPD',\
                                  'LAND_USE_GP', "LAND_USE", 'HOUSE_NR_LO', 'SDIR','STREET', 'STTYPE', \
-                        'OWNER_NAME_1', 'OWNER_NAME_2', 'OWNER_NAME_3', 'OWNER_MAIL_ADDR','OWNER_CITY_STATE', 'OWNER_ZIP', 'ZONING']
+                        'OWNER_NAME_1', 'OWNER_NAME_2', 'OWNER_NAME_3', 'OWNER_MAIL_ADDR','OWNER_CITY_STATE', 'OWNER_ZIP', 'ZONING',\
+                            'CONVEY_DATE','CONVEY_TYPE']
 
 SUBSET_MPROP_COLS = ['TAXKEY', 'YR_ASSMT','C_A_LAND', 'C_A_IMPRV', 'C_A_TOTAL', 'OWNER_NAME_1', 'OWNER_NAME_2',\
        'OWNER_NAME_3', 'OWNER_MAIL_ADDR', 'OWNER_CITY_STATE', 'OWNER_ZIP',\
        'NR_UNITS', 'YR_BUILT', 'ZONING', 'LAND_USE', 'LAND_USE_GP', 'OWN_OCPD',\
-       'Address']
+       'Address', 'CONVEY_DATE','CONVEY_TYPE']
 
 
 def get_mke_od_url():
