@@ -10,6 +10,7 @@ import os
 CRS = 4326
 ALD_2018 = r'https://data.milwaukee.gov/dataset/1301738f-4b4a-4f73-bbaa-a4cac069e371/resource/51ca7f90-66cd-47f2-9197-fd4a5ba08c44/download/alderman.zip'
 MPD_SHP = r'https://data.milwaukee.gov/dataset/1cb11103-18df-4c6e-b622-859d1e217920/resource/cac45f22-0609-4972-88a5-a3f6d9f74f83/download/mpd.zip'
+PARCEL_2020 = r'https://data.milwaukee.gov/dataset/3e238aee-5a21-4e2f-8ae7-803440c5d88a/resource/9cc9ba74-96d7-4678-ad70-f61513543e59/download/parcelbase_mprop_full_2020.zip'
 
 MPROP_COLS = ['TAXKEY','YR_ASSMT', 'NR_UNITS', 'YR_BUILT', 'C_A_LAND', 'C_A_IMPRV', 'C_A_TOTAL', 'OWN_OCPD',\
                                  'LAND_USE_GP', "LAND_USE", 'HOUSE_NR_LO', 'SDIR','STREET', 'STTYPE', \
@@ -138,7 +139,7 @@ if __name__ == "__main__":
     cen = gpd.read_file("data/census.geojson")
 
     #read city parcelbase
-    pcb = gpd.read_file(get_mke_od_url())
+    pcb = gpd.read_file(PARCEL_2020)
 
     #get centroid of parcel in wgs84
     pcb = pcb_to_wgs_84(pcb)
